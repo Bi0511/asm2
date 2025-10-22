@@ -1,0 +1,287 @@
+/* style.css - Quản lý sản phẩm của anh Minh đẹp trai 😎 */
+
+/* --- Reset / base --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+:root{
+  --bg: #f6f7fb;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --accent: #0d6efd;
+  --accent-dark: #0b5ed7;
+  --warn: #ffc107;
+  --danger: #dc3545;
+  --success: #198754;
+  --border: #e6e9ef;
+  --shadow: 0 6px 18px rgba(17,24,39,0.06);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --max-width: 1100px;
+}
+
+/* --- Page layout --- */
+body{
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: var(--bg);
+  color: #111827;
+  padding: 28px;
+  line-height: 1.4;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* Headings */
+h1, h2 {
+  text-align: center;
+  margin-bottom: 14px;
+}
+h1{
+  font-size: 1.6rem;
+  margin-bottom: 18px;
+}
+h2{
+  font-size: 1.125rem;
+  color: var(--muted);
+  margin-top: 18px;
+}
+
+/* --- Forms layout --- */
+.forms {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+/* On wide screens, show add + edit side-by-side */
+@media (min-width: 900px){
+  .forms {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+form {
+  background: var(--card);
+  padding: 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+/* Smaller card header */
+.form-title {
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 0.98rem;
+}
+
+/* form controls */
+.form-group {
+  margin-bottom: 10px;
+}
+label {
+  display: block;
+  font-size: 0.88rem;
+  color: #374151;
+  margin-bottom: 6px;
+}
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="tel"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: #fbfdff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 4px 12px rgba(13,110,253,0.08);
+}
+
+/* Buttons */
+.button-row {
+  display:flex;
+  gap:8px;
+  align-items:center;
+  margin-top:8px;
+}
+button {
+  padding: 9px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.add-btn {
+  background: var(--accent);
+  color: #fff;
+}
+.add-btn:hover { background: var(--accent-dark); }
+
+.reset-btn {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+/* --- Table --- */
+.table-card {
+  margin-top: 12px;
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  overflow: auto;
+  padding: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px; /* make horizontally scroll on small screens */
+}
+thead th {
+  text-align: left;
+  padding: 12px 14px;
+  font-size: 0.9rem;
+  color: #111827;
+  background: linear-gradient(180deg, rgba(0,0,0,0.02), transparent);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+tbody td {
+  padding: 12px 14px;
+  border-top: 1px solid var(--border);
+  vertical-align: middle;
+}
+tbody tr:hover {
+  background: rgba(13,110,253,0.03);
+}
+
+/* ID column smaller */
+td:first-child {
+  width: 56px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* Price styling */
+.price {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* Category pill */
+.pill {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  background: #f3f4f6;
+  color: #111827;
+}
+
+/* Actions */
+.actions {
+  display:flex;
+  gap:8px;
+  justify-content: center;
+}
+.edit-btn {
+  background: var(--warn);
+  color: #111827;
+  padding: 7px 10px;
+  border-radius: 8px;
+  font-weight: 700;
+}
+.delete-btn {
+  background: var(--danger);
+  color: #fff;
+  padding: 7px 10px;
+  border-radius: 8px;
+  font-weight: 700;
+}
+.view-btn {
+  background: var(--success);
+  color: #fff;
+  padding: 7px 10px;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+/* Small helpers */
+.note {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 640px){
+  body {
+    padding: 14px;
+  }
+  h1 {
+    font-size: 1.25rem;
+  }
+  table {
+    min-width: 640px;
+  }
+  thead th {
+    font-size: 0.85rem;
+  }
+  tbody td {
+    font-size: 0.92rem;
+  }
+}
+
+/* nice little footer area for totals / search (optional) */
+.toolbar {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom: 12px;
+}
+.search {
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+.search input {
+  width: 240px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+.select-small {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+/* empty state */
+.empty {
+  padding: 28px;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* subtle utility classes */
+.hidden { display: none !important; }
+.center { text-align: center; }

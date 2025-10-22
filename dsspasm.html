@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHOP ANGELWEAR - TẤT CẢ SẢN PHẨM</title>
+    <!-- Tải Font Awesome cho Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tải Font Space Grotesk (Bobui Style) -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ================================================= */
+        /* 1. THIẾT LẬP CHUNG & FONT */
+        /* ================================================= */
+        :root {
+            --color-primary: #000000;
+            --color-secondary: #f5f5f5;
+            --color-text-light: #555555;
+            --color-border: #e0e0e0;
+            --color-sale: #e73b3b;
+            --padding-desktop: 40px;
+            --padding-mobile: 15px;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-secondary);
+            color: var(--color-primary);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .main-header {
+            background-color: white;
+            padding: 15px var(--padding-desktop);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--color-border);
+            position: sticky; /* Giữ header cố định trên cùng */
+            top: 0;
+            z-index: 99;
+        }
+        
+        .logo img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* Ẩn checkbox - dùng cho mobile menu */
+        .menu-checkbox {
+            display: none;
+        }
+
+        .nav-links {
+            display: none; /* Mặc định ẩn trên mobile */
+        }
+        
+        .nav-links a {
+            padding: 10px 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            display: inline-block;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover, .nav-item:hover > a {
+            color: var(--color-text-light);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+        
+        .action-icon {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background-color: var(--color-primary);
+            color: white;
+            border-radius: 50%;
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+        }
+        
+        /* Dropdown Styling (Dùng :hover thuần CSS) */
+        .nav-item {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+            z-index: 100;
+            border-radius: 4px;
+            overflow: hidden;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .dropdown-content a {
+            color: var(--color-primary);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-transform: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            border-bottom: none; /* Bỏ border cho mobile menu link */
+        }
+        
+        .dropdown-content a:hover {
+            background-color: var(--color-secondary);
+            color: var(--color-primary);
+        }
+        
+        /* Kích hoạt Dropdown bằng CSS :hover */
+        .nav-item:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-icon {
+            display: block;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Icon đóng/mở menu */
+        #close-icon { display: none; }
+        
+        /* Desktop View */
+        @media (min-width: 1024px) {
+            .main-header {
+                padding: 15px var(--padding-desktop);
+            }
+            .nav-links {
+                display: flex !important; /* HIỆN menu trên desktop */
+                flex-direction: row;
+                position: static;
+                box-shadow: none;
+                padding: 0;
+            }
+            .mobile-menu-icon {
+                display: none;
+            }
+            .nav-item:hover .dropdown-content {
+                display: block;
+            }
+        }
+
+        /* Mobile View (Dưới 1024px) */
+        @media (max-width: 1023px) {
+            .main-header {
+                padding: 10px var(--padding-mobile);
+            }
+            
+            /* Cấu hình menu di động (Sidebar) */
+            .nav-links {
+                position: absolute;
+                top: 70px; /* Vị trí dưới header */
+                left: 0;
+                width: 100%;
+                background-color: white;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                flex-direction: column;
+                padding: 10px 0;
+                display: none; 
+                z-index: 90;
+                height: auto;
+            }
+            
+            .nav-links .nav-item {
+                display: block;
+                width: 100%;
+            }
+            
+            .nav-links a {
+                padding: 15px var(--padding-mobile);
+                border-bottom: 1px solid var(--color-border);
+                width: 100%;
+                box-sizing: border-box;
+                display: block; /* Links chiếm toàn bộ chiều rộng */
+                text-align: left;
+            }
+            
+            /* Kích hoạt menu khi checkbox được check (Checkbox Hack) */
+            .menu-checkbox:checked ~ .nav-links {
+                display: flex; 
+            }
+
+            /* Chuyển đổi icon mở/đóng */
+            .menu-checkbox:checked ~ .nav-actions .mobile-menu-icon #open-icon { display: none; }
+            .menu-checkbox:checked ~ .nav-actions .mobile-menu-icon #close-icon { display: inline-block; }
+            
+            /* Dropdown trên mobile sẽ bung ra theo chiều dọc (pure CSS :hover chỉ hoạt động với click giả lập hoặc tap lâu) */
+            .dropdown-content {
+                position: static; /* Làm cho dropdown xuất hiện ngay bên dưới */
+                box-shadow: none;
+                border: none;
+                min-width: 100%;
+                background-color: var(--color-secondary);
+                padding: 0;
+                transform: none;
+                margin-top: 0;
+            }
+            
+            .dropdown-content a {
+                padding-left: 30px; /* Thụt lề cho link dropdown */
+                border-bottom: 1px dashed var(--color-border);
+            }
+        }
+        
+        /* ================================================= */
+        /* 3. NỘI DUNG CHÍNH - DANH SÁCH SẢN PHẨM */
+        /* ================================================= */
+        .product-listing-page-content {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 var(--padding-mobile);
+            display: flex;
+            gap: 30px;
+        }
+        
+        /* Tiêu đề trang */
+        .page-title-section {
+            padding: 0 0 20px 0;
+            border-bottom: 2px solid var(--color-primary);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .page-title-section h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 0;
+        }
+        
+        /* Sidebar Filters (Bộ lọc) */
+        .sidebar-filters {
+            width: 250px;
+            flex-shrink: 0;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            display: none; /* Ẩn trên mobile */
+        }
+        
+        @media (min-width: 1024px) {
+            .product-listing-page-content {
+                padding: 0 var(--padding-desktop);
+            }
+            .sidebar-filters {
+                display: block; /* Hiện trên desktop */
+            }
+        }
+        
+        .filter-group {
+            margin-bottom: 25px;
+        }
+        
+        .filter-group h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .filter-group ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .filter-group li {
+            margin-bottom: 8px;
+        }
+        
+        .filter-group a {
+            font-size: 0.9rem;
+            color: var(--color-text-light);
+            display: block;
+        }
+        
+        .filter-group a:hover {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .main-product-area {
+            flex-grow: 1;
+        }
+        
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (min-width: 1200px) {
+            .product-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        /* Product Card */
+        .product-item {
+            display: block;
+            background-color: white;
+            border-radius: 6px;
+            overflow: hidden;
+            transition: box-shadow 0.3s;
+            position: relative;
+        }
+        
+        .product-item:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .product-image {
+            position: relative;
+            padding-top: 100%; /* Aspect ratio 1:1 */
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-item:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-details {
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .product-brand {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--color-text-light);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        
+        .product-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin: 0 0 10px 0;
+            min-height: 40px; /* Dành cho 2 dòng text */
+            overflow: hidden;
+        }
+        
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--color-sale);
+            margin: 0;
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--color-primary);
+            color: white;
+            padding: 4px 10px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            border-radius: 4px;
+            z-index: 10;
+            text-transform: uppercase;
+        }
+
+        /* Nút Xem Tất Cả */
+        .wiew {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .wiew button {
+            background-color: var(--color-primary);
+            color: white;
+            border: 2px solid var(--color-primary);
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 4px;
+        }
+        
+        .wiew button:hover {
+            background-color: white;
+            color: var(--color-primary);
+        }
+        
+    </style>
+</head>
+<body>
+    
+    <!-- HEADER -->
+    <header class="main-header">
+        <div class="logo">
+            <!-- Logo gốc có thể bị ngược màu trên nền trắng, giữ nguyên nếu nó là PNG trong suốt -->
+            <img src="https://vn-test-11.slatic.net/shop/9e7630d549103707e7f5283740b1cd12.png" alt="Saint Angels Logo"> 
+        </div>
+
+        <!-- Checkbox Input Dành cho Mobile Menu (Sử dụng CSS Hack) -->
+        <input type="checkbox" id="menu-toggle" class="menu-checkbox" aria-hidden="true">
+
+        <!-- Desktop Navigation / Mobile Menu Content -->
+        <nav class="nav-links">
+            <div class="nav-item has-dropdown">
+                <a href="#">About <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="#">Our Story</a>
+                    <a href="#">Lookbook</a>
+                    <a href="#">Careers</a>
+                </div>
+            </div>
+
+            <div class="nav-item has-dropdown">
+                <a href="#">SHOP <i class="fas fa-shipping-fast"></i> <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="">All Products</a>
+                    <a href="#">New Arrivals</a>
+                    <a href="#">Sale</a>
+                </div>
+            </div>
+            
+            <div class="nav-item has-dropdown">
+                <a href="#">ANGELWEAR <i class="fas fa-crown"></i> <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="#">Tops</a>
+                    <a href="#">Bottoms</a>
+                    <a href="#">Accessories</a>
+                </div>
+            </div>
+
+            <div class="nav-item has-dropdown">
+                <a href="#">Shopee <i class="fas fa-certificate"></i> <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="#">Official Store Link</a>
+                    <a href="#">Flash Sales</a>
+                </div>
+            </div>
+
+            <a href="#">Blog</a>
+            <a href="#">Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+            <div class="action-icon search-icon">
+                <i class="fas fa-search"></i>
+            </div>
+
+            <div class="action-icon user-menu">
+                <i class="fas fa-user"></i>
+            </div>
+            
+            <div class="action-icon cart">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-count">0</span>
+            </div>
+            
+            <!-- Mobile Menu Icon - Bây giờ là một <label> liên kết với checkbox -->
+            <label for="menu-toggle" class="mobile-menu-icon">
+                <i class="fas fa-bars" id="open-icon"></i>
+                <i class="fas fa-times" id="close-icon"></i>
+            </label>
+        </div>
+    </header>
+    
+    <!-- MAIN PRODUCT LISTING CONTENT -->
+    <div class="page-title-section">
+        <h1>👼 ALL ANGELWEAR PRODUCTS 👼</h1>
+    </div>
+
+    <main class="product-listing-page-content">
+        
+        <!-- SIDEBAR - BỘ LỌC -->
+        <aside class="sidebar-filters">
+            <div class="filter-group">
+                <h3>Danh mục</h3>
+                <ul>
+                    <li><a href="#">Quần Áo (Clothes)</a></li>
+                    <li><a href="#">Phụ Kiện (Accessories)</a></li>
+                    <li><a href="#">Trang Sức (Jewelry)</a></li>
+                    <li><a href="#">Giày Dép (Footwear)</a></li>
+                </ul>
+            </div>
+            
+            <div class="filter-group">
+                <h3>Bộ Lọc Nhanh</h3>
+                <ul>
+                    <li><a href="#">Sản Phẩm Mới (New Arrivals)</a></li>
+                    <li><a href="#">Đang Giảm Giá (Sale)</a></li>
+                    <li><a href="#">Bán Chạy Nhất (Best Sellers)</a></li>
+                </ul>
+            </div>
+            
+            <div class="filter-group">
+                <h3>Lọc theo Giá</h3>
+                <ul>
+                    <li><a href="#">Dưới 300.000₫</a></li>
+                    <li><a href="#">300.000₫ - 500.000₫</a></li>
+                    <li><a href="#">Trên 500.000₫</a></li>
+                </ul>
+            </div>
+            
+            <div class="filter-group">
+                <h3>Kích cỡ (Size)</h3>
+                <ul>
+                    <li><a href="#">S</a></li>
+                    <li><a href="#">M</a></li>
+                    <li><a href="#">L</a></li>
+                    <li><a href="#">Free Size</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- KHU VỰC SẢN PHẨM CHÍNH -->
+        <section class="main-product-area">
+            
+            <!-- Thanh Sắp xếp và Thống kê -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 0.9rem;">
+                <p style="margin: 0; font-weight: 600;">Hiển thị 1 - 16 trong 48 sản phẩm</p>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <label for="sort-by">Sắp xếp:</label>
+                    <!-- Lưu ý: Chức năng sắp xếp này chỉ là giao diện và không hoạt động nếu không có JS/Backend -->
+                    <select id="sort-by" style="padding: 5px; border-radius: 4px; border: 1px solid var(--color-border); font-family: 'Space Grotesk', sans-serif;">
+                        <option value="default">Mới nhất</option>
+                        <option value="price-asc">Giá: Thấp đến Cao</option>
+                        <option value="price-desc">Giá: Cao đến Thấp</option>
+                        <option value="name-asc">Tên: A-Z</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Lưới Sản Phẩm -->
+            <div class="product-grid">
+                
+                <!-- SẢN PHẨM MẪU 1: Quần Áo -->
+                <a href="#" class="product-item">
+                    <div class="product-image">
+                        <img src="https://bizweb.dktcdn.net/thumb/large/100/343/638/products/striped-bw-12-1758653712613.jpg?v=1758653727670" onerror="this.onerror=null;this.src='https://placehold.co/400x400/999999/ffffff?text=Product+1';" alt="Round Neck Knit Long Sleeve T-Shirt">
+                        <span class="product-badge">NEW</span>
+                    </div>
+                    <div class="product-details">
+                        <p class="product-brand">BO ANGELS</p>
+                        <h2 class="product-title">Round Neck Knit Long Sleeve T-Shirt (Striped BW)</h2>
+                        <p class="product-price">490.000₫</p>
+                    </div>
+                </a>
+                
+                <!-- SẢN PHẨM MẪU 2: Trang Sức -->
+                <a href="#" class="product-item">
+                    <div class="product-image">
+                        <img src="https://placehold.co/400x400/f0e68c/333333?text=JEWELRY" onerror="this.onerror=null;this.src='https://placehold.co/400x400/999999/ffffff?text=Product+2';" alt="Necklace Divine Split">
+                        <span class="product-badge" style="background-color: #facc15; color: var(--color-primary);">HOT</span>
+                    </div>
+                    <div class="product-details">
+                        <p class="product-brand">THE DIVINE SPLIT</p>
+                        <h2 class="product-title">Vòng cổ LOVE 💘 - Mạ vàng 18K</h2>
+                        <p class="product-price">750.000₫</p>
+                    </div>
+                </a>
+
+                <!-- SẢN PHẨM MẪU 3: Giảm Giá -->
+                <a href="#" class="product-item">
+                    <div class="product-image">
+                        <img src="https://placehold.co/400x400/4c4c4c/ffffff?text=SALE+SHOE" onerror="this.onerror=null;this.src='https://placehold.co/400x400/999999/ffffff?text=Product+3';" alt="Retro Chunky Sneaker">
+                        <span class="product-badge" style="background-color: var(--color-sale);">SALE 30%</span>
+                    </div>
+                    <div class="product-details">
+                        <p class="product-brand">FOOTWEAR 👣</p>
+                        <h2 class="product-title">Giày Sneaker "Guardian" Đế chunky</h2>
+                        <p class="product-price">899.000₫ <s style="font-weight: 400; color: var(--color-text-light); font-size: 0.9em;">1.290.000₫</s></p>
+                    </div>
+                </a>
+                
+                <!-- SẢN PHẨM MẪU 4: Phụ kiện -->
+                <a href="#" class="product-item">
+                    <div class="product-image">
+                        <img src="https://placehold.co/400x400/a3e635/1a1a1a?text=BAG" onerror="this.onerror=null;this.src='https://placehold.co/400x400/999999/ffffff?text=Product+4';" alt="Crossbody Bag">
+                    </div>
+                    <div class="product-details">
+                        <p class="product-brand">ACCESSORIES 💝</p>
+                        <h2 class="product-title">Túi đeo chéo da chần bông - Mẫu mới 2025</h2>
+                        <p class="product-price">650.000₫</p>
+                    </div>
+                </a>
+                
+                <!-- Lặp lại sản phẩm để tạo lưới -->
+                <a href="#" class="product-item">
+                    <div class="product-image">
+                        <img src="https://placehold.co/400x400/000000/ffffff?text=TOP" onerror="this.onerror=null;this.src='https://placehold.co/400x400/999999/ffffff?text=Product+5';" alt="Cropped Top">
+                    </div>
+                    <div class="product-details">
+                        <p class="product-brand">ANGELWEAR</p>
+                        <h2 class="product-title">Áo Cropped nỉ trơn - Màu Trắng Sứ</h2>
+                        <p class="product-price">320.000₫</p>
+                    </div>
+                </a>
+                <a href="#" class="product-item">
+                    <div class="product-image">
+                        <img src="https://placehold.co/400x400/f0ad4e/1a1a1a?text=RING" onerror="this.onerror=null;this.src='https://placehold.co/400x400/999999/ffffff?text=Product+6';" alt="Angel Ring">
+                        <span class="product-badge">BEST SELLER</span>
+                    </div>
+                    <div class="product-details">
+                        <p class="product-brand">JEWELRY ✨</p>
+                        <h2 class="product-title">Nhẫn "Halo" - Đá Zirconia cao cấp</h2>
+                        <p class="product-price">290.000₫</p>
+                    </div>
+                </a>
+                <a href="#" class="product-item">
+                    <div class="product-image">
+                        <img src="https://placehold.co/400x400/d9534f/ffffff?text=PANT" onerror="this.onerror=null;this.src='https://placehold.co/400x400/999999/ffffff?text=Product+7';" alt="Wide Leg Pant">
+                        <span class="product-badge" style="background-color: var(--color-sale);">SALE 10%</span>
+                    </div>
+                    <div class="product-details">
+                        <p class="product-brand">BOTTOMS</p>
+                        <h2 class="product-title">Quần ống rộng lụa - Màu Đỏ Rượu</h2>
+                        <p class="product-price">405.000₫ <s style="font-weight: 400; color: var(--color-text-light); font-size: 0.9em;">450.000₫</s></p>
+                    </div>
+                </a>
+                <a href="#" class="product-item">
+                    <div class="product-image">
+                        <img src="https://placehold.co/400x400/007bff/ffffff?text=HAT" onerror="this.onerror=null;this.src='https://placehold.co/400x400/999999/ffffff?text=Product+8';" alt="Bucket Hat">
+                    </div>
+                    <div class="product-details">
+                        <p class="product-brand">ACCESSORIES</p>
+                        <h2 class="product-title">Mũ Bucket Angel Logo thêu nổi</h2>
+                        <p class="product-price">210.000₫</p>
+                    </div>
+                </a>
+                
+            </div>
+            
+            <div class="wiew">
+                <button>Xem Thêm Sản Phẩm (View All)</button>
+            </div>
+            
+        </section>
+        
+    </main>
+    
+    <!-- <footer class="main-footer">
+    
+        <div class="footer-column logo-section">
+            <img src="https://vn-test-11.slatic.net/shop/9e7630d549103707e7f5283740b1cd12.png" alt="BOBBUI Logo" width="50%" style="height: auto;">
+            <p class="copyright">
+                © All rights reserved BOBBUI FASHION <br> COMPANY LIMITED
+            </p>
+        </div>
+
+        <div class="footer-column">
+            <h3 class="column-title">CHÍNH SÁCH</h3>
+            <ul class="footer-links">
+                <li><a href="#">Chính sách bảo mật</a></li>
+                <li><a href="#">Chính sách Giao hàng & Đổi trả</a></li>
+                <li><a href="#">Quy định sử dụng</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h3 class="column-title">HỖ TRỢ KHÁCH HÀNG</h3>
+            <ul class="footer-links">
+                <li><a href="#">Tìm kiếm</a></li>
+                <li><a href="#">Đăng nhập</a></li>
+                <li><a href="#">Đăng ký</a></li>
+                <li><a href="#">Giỏ hàng</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column social-section">
+            <h3 class="column-title">ĐĂNG KÝ NHẬN TIN</h3>
+            <div class="social-icons">
+                <a href="#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon youtube"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon tiktok"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <input type="email" placeholder="Nhập email của bạn" style="padding: 8px; width: 100%; margin-top: 15px; border-radius: 4px; border: none; font-family: 'Space Grotesk', sans-serif;">
+        </div>
+    </footer> -->
+    
+</body>
+</html>

@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THANH TOÁN ĐƠN HÀNG</title>
+    <!-- Tải Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ================================================= */
+        /* 1. CSS TỔNG THỂ & THIẾT LẬP FONT (Light Mode) */
+        /* ================================================= */
+        :root {
+            --color-primary: #000000;
+            --color-secondary: #f5f5f5;
+            --color-text-dark: #1a1a1a;
+            --color-text-light: #555555;
+            --color-border: #d1d5db;
+            --color-bg-light: #ffffff;
+            --color-accent-green: #22c55e;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-secondary);
+            color: var(--color-text-dark);
+            line-height: 1.5;
+        }
+
+        /* ================================================= */
+        /* 2. HEADER */
+        /* ================================================= */
+        .header-style {
+            background-color: var(--color-bg-light);
+            border-bottom: 1px solid #e5e5e5;
+            padding: 24px 20px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* ================================================= */
+        /* 3. BỐ CỤC CHÍNH (MAIN LAYOUT) */
+        /* ================================================= */
+        .checkout-container {
+            display: flex;
+            flex-direction: column; /* Mặc định cho mobile (cột) */
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+            gap: 24px; 
+        }
+
+        .checkout-left-box, .checkout-right-box {
+            background-color: var(--color-bg-light);
+            padding: 32px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e5e5e5;
+        }
+
+        .checkout-left-box { flex: 2; }
+        .checkout-right-box { 
+            flex: 1; 
+            height: fit-content;
+        }
+
+        /* Responsive cho Desktop */
+        @media (min-width: 1024px) {
+            .checkout-container {
+                flex-direction: row; /* Chuyển sang hàng ngang trên desktop */
+            }
+        }
+
+        /* ================================================= */
+        /* 4. PHẦN THÔNG TIN GIAO HÀNG (BOX TRÁI) */
+        /* ================================================= */
+        .back-to-cart {
+            display: inline-block;
+            margin-bottom: 24px;
+            color: var(--color-text-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.75rem; /* text-xs */
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+        .back-to-cart:hover {
+            color: var(--color-primary);
+        }
+        
+        .address-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--color-primary);
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+        }
+
+        .address-header h2 {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 700;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        
+        .address-header a {
+            color: var(--color-text-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.875rem; /* text-sm */
+            transition: color 0.2s;
+        }
+        .address-header a:hover { color: var(--color-primary); }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.875rem; /* text-sm */
+        }
+        
+        .input-style {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+        .input-style:focus {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 1px var(--color-primary);
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        @media (min-width: 640px) {
+            .input-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        textarea.input-style {
+            resize: vertical;
+        }
+
+        /* ================================================= */
+        /* 5. PHẦN TÓM TẮT ĐƠN HÀNG (BOX PHẢI) */
+        /* ================================================= */
+        .checkout-right-box h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--color-primary);
+            padding-bottom: 12px;
+            margin: 0 0 24px 0;
+        }
+
+        .summary-line {
+            display: flex;
+            justify-content: space-between; 
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }
+        
+        .summary-line span:first-child {
+            color: var(--color-text-light);
+        }
+
+        .product-summary-list {
+            padding-left: 15px;
+            font-size: 0.8em;
+            color: #777;
+            line-height: 1.4;
+            margin-bottom: 16px;
+        }
+
+        .summary-line.discount span:last-child {
+            color: var(--color-accent-green);
+            font-weight: 600;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #e5e5e5;
+            margin: 24px 0;
+        }
+        
+        .payment-method-group h3 {
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 700;
+            margin: 0 0 16px 0;
+            text-transform: uppercase;
+        }
+
+        /* CUSTOM RADIO BUTTONS (Payment Options) */
+        .payment-option {
+            margin-bottom: 12px; 
+        }
+        
+        .payment-option input[type="radio"] {
+            display: none; 
+        }
+        
+        .payment-option label {
+            display: block; 
+            padding: 12px; 
+            border: 1px solid var(--color-border); 
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background-color: var(--color-bg-light); 
+            text-align: center;
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 500;
+        }
+        
+        .payment-option label:hover {
+            background-color: #f8f8f8;
+        }
+
+        .payment-option input[type="radio"]:checked + label {
+            border-color: var(--color-primary); 
+            background-color: #f0f0f0; /* Nền xám nhẹ khi chọn */
+            font-weight: 700; 
+            box-shadow: 0 0 0 1px var(--color-primary);
+        }
+        
+        .summary-line.total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 800; /* font-extrabold */
+            margin-bottom: 16px;
+        }
+        .summary-line.total strong {
+            color: var(--color-primary);
+        }
+
+        /* NÚT ACTION */
+        .checkout-button {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--color-primary); 
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 16px;
+            transition: background-color 0.3s;
+            text-transform: uppercase;
+        }
+
+        .checkout-button:hover {
+            background-color: #333333;
+        }
+
+        .terms-text {
+            text-align: center;
+            font-size: 0.75rem; /* text-xs */
+            color: var(--color-text-light);
+            margin-top: 8px;
+        }
+
+        /* ================================================= */
+        /* 6. MODAL (Custom Alert) */
+        /* ================================================= */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content-box {
+            background-color: var(--color-bg-light); 
+            margin: 15% auto; 
+            padding: 30px; 
+            width: 90%; 
+            max-width: 450px; 
+            border-radius: 8px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3); 
+            position: relative;
+        }
+
+        .close-btn {
+            color: #aaa; 
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 28px; 
+            font-weight: bold; 
+            cursor: pointer;
+        }
+
+        .modal-content-box h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            margin-bottom: 15px;
+        }
+
+        .modal-details {
+            white-space: pre-wrap; 
+            font-family: 'Inter', monospace; 
+            font-size: 0.85em; 
+            background-color: #f9f9f9; 
+            padding: 15px; 
+            border: 1px solid #eee; 
+            border-radius: 4px;
+            color: #333;
+            overflow-x: auto; /* Đảm bảo không tràn màn hình */
+        }
+    </style>
+</head>
+<body>
+    <header class="header-style">
+        THANH TOÁN ĐƠN HÀNG
+    </header>
+
+    <main class="checkout-container">
+        
+        <!-- CỘT TRÁI: THÔNG TIN GIAO HÀNG -->
+        <section class="checkout-left-box">
+            
+            <a href="giohangvacheck.html" class="back-to-cart">← TRỞ LẠI GIỎ HÀNG</a>
+            
+            <div class="address-header">
+                <h2>Thông tin giao hàng</h2>
+                <a href="#">Thay đổi</a> 
+            </div>
+
+            <form id="checkout-form" onsubmit="event.preventDefault(); showOrderConfirmation()">
+                
+                <!-- Địa chỉ chi tiết -->
+                <div class="form-group">
+                    <label for="street">Địa chỉ chi tiết (*)</label>
+                    <input type="text" id="street" name="street" placeholder="Số nhà, tên đường..." class="input-style" value="123 Nguyễn Du" required>
+                </div>
+                
+                <div class="form-group input-grid">
+                    <div class="form-group">
+                        <label for="city">Tỉnh/Thành phố (*)</label>
+                        <select id="city" name="city" class="input-style" required>
+                            <option value="Hồ Chí Minh" selected>Thành phố Hồ Chí Minh</option>
+                            <option value="Hà Nội">Hà Nội</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="district">Quận/Huyện (*)</label>
+                        <select id="district" name="district" class="input-style" required>
+                            <option value="Quận 1" selected>Quận 1</option>
+                            <option value="Quận 3">Quận 3</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="ward">Phường/Xã (*)</label>
+                    <input type="text" id="ward" name="ward" placeholder="Phường/Xã" class="input-style" value="Phường Bến Nghé" required>
+                </div>
+
+                <hr>
+
+                <div class="form-group">
+                    <label for="name">Tên người nhận (*)</label>
+                    <input type="text" id="name" name="name" class="input-style" value="Nguyễn Văn A" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Số điện thoại (*)</label>
+                    <input type="tel" id="phone" name="phone" class="input-style" value="0901234567" required>
+                </div>
+                <div class="form-group">
+                    <label for="note">Ghi chú (Tùy chọn)</label>
+                    <textarea id="note" name="note" rows="3" placeholder="Ví dụ: Giao hàng sau 17h, không gọi điện..." class="input-style"></textarea>
+                </div>
+                
+            </form>
+        </section>
+
+        <!-- CỘT PHẢI: TÓM TẮT & THANH TOÁN -->
+        <aside class="checkout-right-box">
+            
+            <h2>Tóm tắt đơn hàng</h2>
+            
+            <div class="summary-details">
+                <!-- Tạm tính -->
+                <div class="summary-line">
+                    <span>Tạm tính (2 sản phẩm):</span>
+                    <span style="font-weight: 600;">310.000 VNĐ</span>
+                </div>
+                <div class="product-summary-list">
+                    <p>1 x Tinh dầu Oải Hương</p>
+                    <p>2 x Tinh dầu Bạc Hà</p>
+                </div>
+                
+                <!-- Giảm giá -->
+                <div class="summary-line discount">
+                    <span>Mã giảm giá đã áp dụng:</span>
+                    <span>-10.000 VNĐ</span>
+                </div>
+                <!-- Phí ship -->
+                <div class="summary-line">
+                    <span>Phí vận chuyển:</span>
+                    <span style="font-weight: 600;">30.000 VNĐ</span>
+                </div>
+            </div>
+            
+            <hr>
+
+            <div class="payment-method-group">
+                <h3>Phương thức thanh toán</h3>
+                <!-- Tùy chọn Thanh toán -->
+                <div class="payment-option">
+                    <input type="radio" id="cod" name="payment_method" value="COD" checked>
+                    <label for="cod">Thanh toán khi nhận hàng (COD)</label>
+                </div>
+                <div class="payment-option">
+                    <input type="radio" id="bank" name="payment_method" value="BANK">
+                    <label for="bank">Chuyển khoản Ngân hàng</label>
+                </div>
+                <div class="payment-option">
+                    <input type="radio" id="momo" name="payment_method" value="MOMO">
+                    <label for="momo">Thanh toán qua ví MoMo</label>
+                </div>
+            </div>
+            
+            <hr>
+
+            <!-- TỔNG CỘNG -->
+            <div class="summary-line total">
+                <strong>TỔNG CỘNG:</strong>
+                <strong class="value">330.000 VNĐ</strong>
+            </div>
+
+            <!-- Nút Action -->
+            <button class="checkout-button" type="button" src="viewoderho.html" onclick="showOrderConfirmation()">
+                Hoàn tất đặt hàng
+            </button>
+            
+            <p class="terms-text">Bấm "Hoàn tất đặt hàng" nghĩa là bạn đã đồng ý với các Điều khoản & Chính sách của cửa hàng.</p>
+        </aside>
+    </main>
+    
+    <!-- Custom Modal Structure -->
+    <div id="order-modal" class="modal">
+        <div class="modal-content-box">
+            <span onclick="closeModal()" class="close-btn">&times;</span>
+            <h3>Đơn hàng thành công!</h3>
+            <pre id="modal-content" class="modal-details"></pre>
+            <button onclick="closeModal()" class="checkout-button" style="background-color: #000; margin-top: 15px;">Đóng & Tiếp tục mua sắm</button>
+        </div>
+    </div>
+    
+    <script>
+        // Hàm lấy thông tin và hiển thị modal xác nhận đơn hàng
+        function showOrderConfirmation() {
+            // Lấy thông tin form
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const street = document.getElementById('street').value;
+            const ward = document.getElementById('ward').value;
+            const city = document.getElementById('city').value;
+            const district = document.getElementById('district').value;
+            
+            // Kiểm tra các trường bắt buộc
+            if (!name || !phone || !street || !ward || !city || !district) {
+                // Trong môi trường thực tế, cần hiển thị thông báo lỗi rõ ràng trên UI
+                console.error("Vui lòng điền đầy đủ thông tin bắt buộc.");
+                return; 
+            }
+
+            // Lấy phương thức thanh toán
+            const paymentMethodElement = document.querySelector('input[name="payment_method"]:checked');
+            // Lấy nội dung text của label đi kèm
+            const paymentMethod = paymentMethodElement ? paymentMethodElement.nextElementSibling.textContent.trim() : "Chưa chọn";
+            
+            const fullAddress = `${street}, ${ward}, ${district}, ${city}`;
+            
+            const orderDetails = 
+                "Đơn hàng đã được đặt thành công!\n" +
+                "===================================\n" +
+                "Mã đơn hàng: #BOBUI20250929\n" +
+                "Ngày đặt hàng: 29/09/2025\n\n" +
+                "*** Thông tin giao hàng ***\n" +
+                `Người nhận: ${name}\n` +
+                `SĐT: ${phone}\n` +
+                "Địa chỉ: " + fullAddress + "\n\n" +
+                "*** Chi tiết thanh toán ***\n" +
+                "Tạm tính: 310.000 VNĐ\n" +
+                "Giảm giá: -10.000 VNĐ\n" +
+                "Phí ship: 30.000 VNĐ\n" +
+                "PTTT: " + paymentMethod + "\n" +
+                "Tổng giá trị đơn hàng: 330.000 VNĐ\n";
+            
+            document.getElementById('modal-content').textContent = orderDetails;
+            document.getElementById('order-modal').style.display = 'block';
+        }
+
+        // Hàm đóng modal
+        function closeModal() {
+            document.getElementById('order-modal').style.display = 'none';
+        }
+
+        // Kích hoạt style cho radio button được chọn ngay khi load trang
+        document.addEventListener('DOMContentLoaded', () => {
+            const defaultCheckedRadio = document.querySelector('input[name="payment_method"]:checked');
+            if (defaultCheckedRadio) {
+                // Áp dụng style cho label của radio được check
+                const label = defaultCheckedRadio.nextElementSibling;
+                label.style.borderColor = 'var(--color-primary)';
+                label.style.backgroundColor = '#f0f0f0';
+                label.style.fontWeight = '700';
+                label.style.boxShadow = '0 0 0 1px var(--color-primary)';
+            }
+
+            // Thêm lắng nghe sự kiện để thay đổi style khi chọn
+            document.querySelectorAll('input[name="payment_method"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    // Reset style của tất cả labels
+                    document.querySelectorAll('.payment-option label').forEach(label => {
+                        label.style.borderColor = 'var(--color-border)';
+                        label.style.backgroundColor = 'var(--color-bg-light)';
+                        label.style.fontWeight = '500';
+                        label.style.boxShadow = 'none';
+                    });
+
+                    // Áp dụng style cho label vừa được chọn
+                    if (e.target.checked) {
+                        const label = e.target.nextElementSibling;
+                        label.style.borderColor = 'var(--color-primary)';
+                        label.style.backgroundColor = '#f0f0f0';
+                        label.style.fontWeight = '700';
+                        label.style.boxShadow = '0 0 0 1px var(--color-primary)';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

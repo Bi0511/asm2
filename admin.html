@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quản lý sản phẩm - Anh Minh đẹp trai 😎</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Quản lý sản phẩm của Admin</h1>
+
+  <!-- Form thêm sản phẩm -->
+  <form id="productForm">
+    <div class="form-group">
+      <label for="name">Tên sản phẩm:</label>
+      <input type="text" id="name" required />
+    </div>
+
+    <div class="form-group">
+      <label for="price">Giá (VNĐ):</label>
+      <input type="number" id="price" min="0" required />
+    </div>
+
+    <div class="form-group">
+      <label for="category">Danh mục:</label>
+      <input type="text" id="category" required />
+    </div>
+
+    <div class="form-group">
+      <label for="desc">Mô tả:</label>
+      <textarea id="desc" rows="3"></textarea>
+    </div>
+
+    <button type="submit" class="add-btn">Thêm sản phẩm</button>
+  </form>
+
+  <!-- Form sửa sản phẩm -->
+  <form id="editForm">
+    <div class="form-group">
+      <label for="editname">Tên sản phẩm:</label>
+      <input type="text" id="editname" required />
+    </div>
+
+    <div class="form-group">
+      <label for="editprice">Giá (VNĐ):</label>
+      <input type="number" id="editprice" min="0" required />
+    </div>
+
+    <div class="form-group">
+      <label for="editcategory">Danh mục:</label>
+      <input type="text" id="editcategory" required />
+    </div>
+
+    <div class="form-group">
+      <label for="editdesc">Mô tả:</label>
+      <textarea id="editdesc" rows="3"></textarea>
+    </div>
+
+    <button type="submit" class="add-btn">Cập nhật</button>
+  </form>
+
+  <hr>
+
+  <h2>Danh sách sản phẩm của Admin</h2>
+  <table id="productTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Tên sản phẩm</th>
+        <th>Giá (VNĐ)</th>
+        <th>Danh mục</th>
+        <th>Mô tả</th>
+        <th>Chức năng</th>
+      </tr>
+    </thead>
+    <tbody id="productBody">
+      <!-- Dữ liệu thêm bằng JS -->
+    </tbody>
+  </table>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>

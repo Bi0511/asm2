@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIỎ HÀNG</title>
+    <!-- Tải font Inter để có phong cách hiện đại, sắc nét -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS TỔNG THỂ (Light Mode, High-Contrast) --- */
+        :root {
+            --color-black: #000000;
+            --color-white: #ffffff;
+            --color-light-bg: #f5f5f5; /* Nền sáng */
+            --color-container-bg: #ffffff; /* Nền container trắng tinh */
+            --color-border: #dddddd; /* Đường viền nhẹ */
+            --color-text-dim: #666666; /* Chữ mờ */
+            --color-accent-green: #008000; /* Dùng cho giảm giá */
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            background-color: var(--color-light-bg); /* Nền sáng nhẹ */
+            color: var(--color-black); /* Chữ đen */
+            line-height: 1.6;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0 10px 0;
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+
+        h2, h3 {
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+
+        /* Bố cục chính của giỏ hàng (2 cột) */
+        .cart-container {
+            display: flex;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+            gap: 30px; 
+        }
+
+        /* Hộp bên trái & bên phải (Màu Trắng) */
+        .cart-left-box,
+        .cart-right-box {
+            background-color: var(--color-container-bg);
+            padding: 30px;
+            border: 1px solid var(--color-border);
+            height: fit-content;
+        }
+        
+        .cart-left-box {
+            flex: 2; 
+        }
+        
+        .cart-right-box {
+            flex: 1; 
+        }
+
+        .cart-right-box h2 {
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* --- SẢN PHẨM TRONG GIỎ HÀNG --- */
+        .product-item {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--color-border);
+            padding: 20px 0;
+            justify-content: space-between;
+            font-size: 0.9em;
+        }
+
+        .product-thumbnail {
+            width: 80px;
+            height: 80px;
+            margin-right: 20px;
+            overflow: hidden;
+            border: 1px solid var(--color-border); /* Thêm viền nhẹ cho ảnh */
+        }
+        
+        .product-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-details {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        .product-info p {
+            margin: 0 0 3px 0;
+        }
+        
+        .product-info span {
+            color: var(--color-text-dim);
+            font-size: 0.85em;
+        }
+
+        /* Số lượng và thành tiền */
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            margin: 0 30px;
+        }
+
+        .qty-btn {
+            width: 34px;
+            height: 34px;
+            background-color: var(--color-light-bg);
+            border: 1px solid var(--color-border);
+            color: var(--color-black);
+            cursor: pointer;
+            font-size: 1.1em;
+            line-height: 1;
+            transition: background-color 0.2s;
+        }
+        
+        .qty-btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        .qty-input {
+            width: 40px;
+            height: 34px;
+            text-align: center;
+            background-color: var(--color-white);
+            color: var(--color-black);
+            border: 1px solid var(--color-border);
+            margin: 0 5px;
+            outline: none;
+        }
+        
+        .remove-btn {
+            background: none;
+            border: none;
+            color: var(--color-text-dim);
+            font-size: 0.7em;
+            cursor: pointer;
+            text-transform: uppercase;
+            margin-left: 15px;
+            padding: 5px;
+            transition: color 0.2s;
+        }
+        
+        .remove-btn:hover {
+            color: var(--color-black);
+        }
+
+        .subtotal {
+            text-align: right;
+            width: 100px; 
+            font-weight: 700;
+        }
+        
+        /* Liên kết "Mua thêm" */
+        .continue-shopping {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .continue-shopping a {
+            color: var(--color-text-dim); 
+            text-decoration: none;
+            font-weight: 400;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 1px;
+            transition: color 0.2s;
+        }
+
+        .continue-shopping a:hover {
+            color: var(--color-black);
+        }
+
+        /* --- VOUCHER & TÓM TẮT --- */
+        .voucher-section {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid var(--color-border); 
+            background-color: var(--color-light-bg); /* Nền nhẹ hơn cho voucher */
+        }
+
+        .voucher-section h3 {
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .voucher-tags {
+            display: flex; 
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .voucher-tag {
+            padding: 6px 12px;
+            border: 1px solid var(--color-border);
+            background-color: var(--color-white);
+            color: var(--color-black);
+            cursor: pointer;
+            font-size: 0.8em;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: all 0.2s;
+        }
+
+        .voucher-tag.active {
+            background-color: var(--color-black); 
+            color: var(--color-white);
+            border-color: var(--color-black);
+        }
+        
+        .voucher-tag:hover:not(.active) {
+            background-color: #e9e9e9;
+        }
+
+        .voucher-input {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--color-white);
+            color: var(--color-black);
+            border: 1px solid var(--color-border);
+            outline: none;
+        }
+        
+        /* Dòng tóm tắt */
+        .summary-line {
+            display: flex;
+            justify-content: space-between; 
+            margin-bottom: 10px;
+            color: var(--color-text-dim);
+        }
+
+        .summary-line .value {
+            color: var(--color-black);
+            font-weight: 600;
+        }
+
+        .summary-line.applied-voucher .value {
+            color: var(--color-accent-green);
+        }
+        
+        hr {
+            border: none;
+            border-top: 1px solid var(--color-border);
+            margin: 20px 0;
+        }
+
+        .summary-line.total {
+            font-size: 1.4em;
+            color: var(--color-black); 
+            margin-top: 20px;
+            padding-top: 10px;
+        }
+
+        /* Nút Checkout */
+        .checkout-button {
+            width: 100%;
+            padding: 18px;
+            background-color: var(--color-black); /* Nút đen */
+            color: var(--color-white);
+            border: none;
+            font-size: 1.1em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s;
+        }
+
+        .checkout-button:hover {
+            background-color: #333333;
+        }
+
+        /* --- RESPONSIVE (Mobile View) --- */
+        @media (max-width: 768px) {
+            .cart-container {
+                flex-direction: column; 
+                margin: 20px 0;
+                padding: 0 10px;
+                gap: 15px;
+            }
+            
+            .cart-left-box,
+            .cart-right-box {
+                padding: 20px 15px;
+            }
+
+            .product-item {
+                flex-wrap: wrap; 
+                justify-content: flex-start;
+                gap: 15px;
+            }
+            
+            .product-details {
+                flex-grow: 1;
+            }
+
+            .product-info {
+                flex-grow: 1;
+            }
+
+            .quantity-control {
+                margin: 0;
+                order: 3; 
+                width: 150px;
+            }
+            
+            .subtotal {
+                order: 2; 
+                width: auto;
+                margin-left: auto; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- Tên thương hiệu hoặc Tiêu đề trang -->
+        GIỎ HÀNG CỦA BẠN
+    </header>
+    <main class="cart-container">
+        <section class="cart-left-box">
+            <h2>Các sản phẩm đã chọn</h2>
+            <div id="product_item">
+
+            </div>
+            <!-- Sản phẩm 1 -->
+           
+
+            <!-- Sản phẩm 2 (Minh họa) -->
+            
+            <div style="border-top: 1px solid var(--color-border); margin-top: 30px;"></div>
+            
+            <!-- Note -->
+            <h2 style="font-size: 1.1em; margin-top: 20px; font-weight: 600;">GHI CHÚ ĐƠN HÀNG</h2>
+            <textarea placeholder="Thêm ghi chú đặc biệt cho đơn hàng của bạn..." class="voucher-input" style="height: 100px; padding: 10px; margin-top: 10px;"></textarea>
+
+        </section>
+
+        <aside class="cart-right-box">
+            <h2>Tóm tắt đơn hàng</h2>
+            
+            <div class="summary-line">
+                <span>Mua thêm 510.000₫ để được **freeship**</span>
+                <span style="color: var(--color-accent-green); font-weight: 700;">+2</span>
+            </div>
+            
+            <hr>
+
+            <!-- Voucher Section -->
+            <div class="voucher-section">
+                <h3>VOUCHER</h3>
+                <div class="voucher-tags">
+                    <button class="voucher-tag active">GIẢM 50K</button>
+                    <button class="voucher-tag">FREESHIP</button>
+                    <button class="voucher-tag">20% OFF</button>
+                </div>
+                <input type="text" placeholder="NHẬP MÃ GIẢM GIÁ" class="voucher-input">
+            </div>
+
+            <hr>            
+            <hr>
+            
+            <div class="summary-line total">
+                <strong>TỔNG CỘNG:</strong>
+                <strong class="value final-price"></strong>
+            </div>
+
+            <button class="checkout-button">
+                THANH TOÁN
+            </button>
+            
+            <div style="text-align: center; font-size: 0.8em; color: var(--color-text-dim); margin-top: 10px;">
+                (Đã bao gồm VAT nếu có)
+            </div>
+        </aside>
+    </main>
+    <footer style="text-align: center; padding: 40px; color: var(--color-text-dim); font-size: 0.9em;">
+        <!-- Phần chân trang tối giản -->
+        © 2024 BOBUI FASHION. ALL RIGHTS RESERVED.
+    </footer>
+    <script src="ctsp.js"></script>
+    <script src="giohangvacheck.js"></script>
+</body>
+</html>

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Tiết Sản Phẩm: Round Neck Knit Long Sleeve T-Shirt</title>
+    <!-- Tải Font Awesome cho các icon (Vận chuyển, Quà tặng, v.v.) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- GLOBAL RESET & BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* ============================= */
+/* 🎯 MENU HEADER - SAINT ANGELS */
+/* ============================= */
+:root {
+  --color-primary: #000;
+  --color-light: #f5f5f5;
+  --color-text: #333;
+  --color-border: #ddd;
+  --transition-fast: 0.3s ease;
+}
+
+.main-header {
+  background-color: #fff;
+  padding: 15px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo img {
+  height: 45px;
+  object-fit: contain;
+}
+
+/* --- NAVIGATION --- */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.nav-links a {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--color-primary);
+  position: relative;
+  transition: var(--transition-fast);
+  text-decoration: none;
+}
+
+/* Hiệu ứng gạch chân mượt */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--color-primary);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-links a:hover::after {
+  width: 50%;
+}
+
+.nav-links a:hover {
+  color: #666;
+}
+
+/* --- DROPDOWN --- */
+.nav-item {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  min-width: 170px;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s ease;
+}
+
+.nav-item:hover .dropdown-content {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  top: 100%;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 12px 18px;
+  text-transform: none;
+  color: var(--color-text);
+  font-weight: 500;
+  transition: var(--transition-fast);
+}
+
+.dropdown-content a:hover {
+  background-color: var(--color-light);
+}
+
+/* --- ACTION ICONS --- */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.action-icon {
+  cursor: pointer;
+  position: relative;
+  font-size: 1.2rem;
+  color: var(--color-primary);
+  transition: var(--transition-fast);
+}
+
+.action-icon:hover {
+  color: #777;
+}
+
+.cart-count {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background: var(--color-primary);
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+/* --- MOBILE MENU --- */
+.menu-checkbox {
+  display: none;
+}
+
+.mobile-menu-icon {
+  display: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+#close-icon {
+  display: none;
+}
+
+/* Mobile Layout */
+@media (max-width: 1023px) {
+  .main-header {
+    padding: 15px 20px;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background: #fff;
+    flex-direction: column;
+    align-items: flex-start;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .menu-checkbox:checked ~ .nav-links {
+    height: 330px;
+    padding: 15px 0;
+  }
+
+  .nav-links a {
+    padding: 12px 25px;
+    width: 100%;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .mobile-menu-icon {
+    display: block;
+  }
+
+  .menu-checkbox:checked ~ .nav-actions .mobile-menu-icon #open-icon {
+    display: none;
+  }
+
+  .menu-checkbox:checked ~ .nav-actions .mobile-menu-icon #close-icon {
+    display: inline-block;
+  }
+
+  .dropdown-content {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    background-color: #fafafa;
+    width: 100%;
+    opacity: 1;
+    visibility: visible;
+    display: none;
+  }
+
+  .nav-item:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown-content a {
+    padding-left: 40px;
+  }
+}
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        /* ------------------------------------------- */
+        /* --- 1. MAIN LAYOUT (Bố cục 2 cột) --- */
+        /* ------------------------------------------- */
+        .product-page-container {
+            display: flex;
+            max-width: 1300px;
+            margin: 40px auto;
+            padding: 0 40px;
+            gap: 40px;
+        }
+
+        /* --- Cột trái: Hình ảnh (Gallery & Main Image) --- */
+        .product-gallery-wrapper {
+            flex: 3;
+            max-width: 60%;
+            display: flex;
+            gap: 20px;
+        }
+
+        /* --- Gallery ảnh nhỏ (Dọc) --- */
+        .thumbnails {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .thumbnails img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            cursor: pointer;
+            /* Ảnh mặc định được chọn */
+        }
+        
+        .thumbnails img:first-child {
+            border-color: #000;
+        }
+
+        /* --- Ảnh chính --- */
+        .main-image {
+            flex-grow: 1;
+        }
+
+        .main-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* --- Cột phải: Thông tin (chiếm 40%) --- */
+        .product-info {
+            flex: 2;
+            max-width: 40%;
+            padding: 0;
+        }
+
+        /* ------------------------------------------- */
+        /* --- 2. PRODUCT INFO STYLES --- */
+        /* ------------------------------------------- */
+
+        .product-brand {
+            font-size: 14px;
+            color: #777;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .product-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.2;
+            color: #000;
+            text-transform: uppercase;
+        }
+
+        .product-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* --- Lựa chọn Biến thể --- */
+        .variant-selection {
+            margin-bottom: 25px;
+        }
+
+        .variant-label {
+            font-size: 14px;
+            font-weight: 400;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        /* Màu sắc (Hình tròn) */
+        .color-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 1px solid #ccc;
+        }
+        
+        /* Màu được chọn (Black White) */
+        .color-option.active {
+            border-color: #000;
+            box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000;
+        }
+
+        /* Kích cỡ (Nút) */
+        .size-variant-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .size-selection-guide {
+            font-size: 12px;
+            color: #777;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .size-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .size-option {
+            padding: 8px 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        /* Size mặc định được chọn (XL) */
+        .size-option.active {
+            background-color: #000;
+            color: #fff;
+            border-color: #000;
+        }
+
+        /* ------------------------------------------- */
+        /* --- 3. PURCHASE ACTIONS --- */
+        /* ------------------------------------------- */
+
+        /* Khu vực số lượng */
+        .quantity-selector {
+            display: flex;
+            border: 1px solid #000;
+            width: 150px;
+            height: 50px;
+            margin-bottom: 20px;
+        }
+
+        .quantity-btn {
+            width: 50px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: default; /* Không có JS nên dùng cursor default */
+            color: #000;
+        }
+
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+            color: #000;
+            outline: none;
+            pointer-events: none; /* Khóa input khi không có JS */
+        }
+
+        .purchase-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-action {
+            width: 100%;
+            padding: 15px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 6px;
+            text-transform: uppercase;
+            border: none;
+            text-align: center;
+            text-decoration: none; /* Dùng thẻ <a> để giả lập nút */
+        }
+
+        .btn-add-to-cart {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .btn-buy-now {
+            background-color: #000;
+            color: #fff;
+            margin-top: 10px;
+        }
+        
+        /* Thông tin liên hệ */
+        .contact-info {
+            text-align: center; 
+            font-size: 14px; 
+            margin-top: 15px;
+        }
+        
+        .contact-info span {
+            font-weight: bold; 
+            color: #000;
+        }
+
+        /* --- 4. SERVICE INFO --- */
+        .service-info {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid #eee;
+        }
+
+        .service-item {
+            display: flex;
+            align-items: flex-start; /* Căn trên cùng */
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        /* Icon sử dụng Font Awesome */
+        .service-icon i {
+            font-size: 20px;
+            color: #000;
+            width: 20px; /* Cố định chiều rộng icon */
+        }
+
+        .service-text strong {
+            display: block;
+            font-size: 14px;
+        }
+
+        .service-text span, .service-text a {
+            font-size: 12px;
+            color: #555;
+            text-decoration: none;
+        }
+        
+        /* ------------------------------------------- */
+        /* --- 5. RESPONSIVE (Mobile) --- */
+        /* ------------------------------------------- */
+        @media (max-width: 768px) {
+            .product-page-container {
+                flex-direction: column;
+                padding: 0 15px;
+                margin-top: 20px;
+            }
+
+            .product-gallery-wrapper, .product-info {
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .product-gallery-wrapper {
+                flex-direction: column-reverse; /* Đưa thumbnails xuống dưới */
+                gap: 15px;
+            }
+
+            .thumbnails {
+                flex-direction: row; /* Thumbnails nằm ngang trên mobile */
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+
+            .product-title {
+                font-size: 26px;
+                margin-top: 20px;
+            }
+
+            .product-price {
+                font-size: 22px;
+            }
+
+            .quantity-selector {
+                width: 100%;
+            }
+            
+        }
+    </style>
+</head>
+<body>
+      <header class="main-header">
+        <div class="logo">
+            <!-- Logo gốc có thể bị ngược màu trên nền trắng, giữ nguyên nếu nó là PNG trong suốt -->
+            <img src="https://vn-test-11.slatic.net/shop/9e7630d549103707e7f5283740b1cd12.png" alt="Saint Angels Logo"> 
+        </div>
+
+        <!-- Checkbox Input Dành cho Mobile Menu (Sử dụng CSS Hack) -->
+        <input type="checkbox" id="menu-toggle" class="menu-checkbox" aria-hidden="true">
+
+        <!-- Desktop Navigation / Mobile Menu Content -->
+        <nav class="nav-links">
+            <div class="nav-item has-dropdown">
+                <a href="#">About <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="#">Our Story</a>
+                    <a href="#">Lookbook</a>
+                    <a href="#">Careers</a>
+                </div>
+            </div>
+
+            <div class="nav-item has-dropdown">
+                <a href="#">SHOP <i class="fas fa-shipping-fast"></i> <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="dsspasm.html">All Products</a>
+                    <a href="#">New Arrivals</a>
+                    <a href="#">Sale</a>
+                </div>
+            </div>
+            
+            <div class="nav-item has-dropdown">
+                <a href="#">ANGELWEAR <i class="fas fa-crown"></i> <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="#">Tops</a>
+                    <a href="#">Bottoms</a>
+                    <a href="#">Accessories</a>
+                </div>
+            </div>
+
+            <div class="nav-item has-dropdown">
+                <a href="#">Shopee <i class="fas fa-certificate"></i> <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="#">Official Store Link</a>
+                    <a href="#">Flash Sales</a>
+                </div>
+            </div>
+
+            <a href="#">Blog</a>
+            <a href="#">Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+            <div class="action-icon search-icon">
+                <i class="fas fa-search"></i>
+            </div>
+
+            <div class="action-icon user-menu">
+                <i class="fas fa-user"></i>
+            </div>
+            
+            <div class="action-icon cart">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-count">0</span>
+            </div>
+            
+            <!-- Mobile Menu Icon - Bây giờ là một <label> liên kết với checkbox -->
+            <label for="menu-toggle" class="mobile-menu-icon">
+                <i class="fas fa-bars" id="open-icon"></i>
+                <i class="fas fa-times" id="close-icon"></i>
+            </label>
+        </div>
+    </header>
+    <div class="product-page-container">
+
+        <!-- Cột 1: Hình ảnh Sản phẩm và Gallery -->
+        <div class="product-gallery-wrapper">
+
+            <!-- Gallery Ảnh nhỏ (Thumbnail) -->
+            <div class="thumbnails">
+                <!-- Giữ 3 ảnh đầu tiên -->
+                <img src="https://bizweb.dktcdn.net/thumb/medium/100/343/638/products/striped-bw-12-1758653712613.jpg?v=1758653727670" alt="Thumbnail 1" class="active">
+                <img src="//bizweb.dktcdn.net/thumb/medium/100/343/638/products/vn-11134211-820l4-meznholyemmia3-1758653655692.jpg?v=1758653727670" alt="Thumbnail 2">
+                <img src="//bizweb.dktcdn.net/thumb/medium/100/343/638/products/vn-11134211-820l4-meznholyd82220-1758653655692.jpg?v=1758653727670" alt="Thumbnail 3">
+                <!-- Đã loại bỏ 2 ảnh cuối (Thumbnail 4 và 5) -->
+            </div>
+
+            <!-- Ảnh chính Sản phẩm -->
+            <div class="main-image" id="img_ct">
+              
+            </div>
+        </div>
+
+        <!-- Cột 2: Thông tin Sản phẩm & Mua hàng -->
+        <div class="product-info" id="chitiet">
+           
+            <!-- Dịch vụ bổ sung -->
+            <div class="service-info">
+                <div class="service-item">
+                    <span class="service-icon"><i class="fas fa-truck"></i></span>
+                    <div class="service-text">
+                        <strong>Fast Wings Delivery</strong>
+                        <span>Express Delivery</span>
+                    </div>
+                </div>
+                <div class="service-item">
+                    <span class="service-icon"><i class="fas fa-gift"></i></span>
+                    <div class="service-text">
+                        <strong>Special Gifts</strong>
+                        <span>Surprise gifts</span>
+                    </div>
+                </div>
+                <div class="service-item">
+                    <span class="service-icon"><i class="fas fa-award"></i></span>
+                    <div class="service-text">
+                        <strong>Certified by Angels</strong>
+                        <span>Thorough Inspection</span>
+                    </div>
+                </div>
+                <div class="service-item">
+                    <span class="service-icon"><i class="fas fa-headset"></i></span>
+                    <div class="service-text">
+                        <strong>BO ANGELS</strong>
+                        <a href="tel:0817371737">08 1737 1737</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="ctsp.js"></script>
+</body>
+</html>

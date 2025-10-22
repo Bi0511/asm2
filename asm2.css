@@ -1,0 +1,929 @@
+/* --- Global Reset & Base Styles --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+}
+
+body {
+      font-family: "Space Grotesk", sans-serif;
+    line-height: 1.6;
+}
+
+/* ------------------------------------------- */
+/* --- 1. Header & Navbar Layout (Flexbox) --- */
+/* ------------------------------------------- */
+/* ============================= */
+/* CSS MENU HEADER + NAVIGATION  */
+/* ============================= */
+
+ :root {
+            --color-primary: #000000;
+            --color-secondary: #f5f5f5;
+            --color-text-light: #555555;
+            --color-border: #e0e0e0;
+            --color-sale: #e73b3b;
+            --padding-desktop: 40px;
+            --padding-mobile: 15px;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-secondary);
+            color: var(--color-primary);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .main-header {
+            background-color: white;
+            padding: 15px var(--padding-desktop);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--color-border);
+            position: sticky; /* Giữ header cố định trên cùng */
+            top: 0;
+            z-index: 99;
+        }
+        
+        .logo img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* Ẩn checkbox - dùng cho mobile menu */
+        .menu-checkbox {
+            display: none;
+        }
+
+        .nav-links {
+            display: none; /* Mặc định ẩn trên mobile */
+        }
+        
+        .nav-links a {
+            padding: 10px 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            display: inline-block;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover, .nav-item:hover > a {
+            color: var(--color-text-light);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+        
+        .action-icon {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background-color: var(--color-primary);
+            color: white;
+            border-radius: 50%;
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+        }
+        
+        /* Dropdown Styling (Dùng :hover thuần CSS) */
+        .nav-item {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+            z-index: 100;
+            border-radius: 4px;
+            overflow: hidden;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .dropdown-content a {
+            color: var(--color-primary);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-transform: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            border-bottom: none; /* Bỏ border cho mobile menu link */
+        }
+        
+        .dropdown-content a:hover {
+            background-color: var(--color-secondary);
+            color: var(--color-primary);
+        }
+        
+        /* Kích hoạt Dropdown bằng CSS :hover */
+        .nav-item:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-icon {
+            display: block;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Icon đóng/mở menu */
+        #close-icon { display: none; }
+        
+        /* Desktop View */
+        @media (min-width: 1024px) {
+            .main-header {
+                padding: 15px var(--padding-desktop);
+            }
+            .nav-links {
+                display: flex !important; /* HIỆN menu trên desktop */
+                flex-direction: row;
+                position: static;
+                box-shadow: none;
+                padding: 0;
+            }
+            .mobile-menu-icon {
+                display: none;
+            }
+            .nav-item:hover .dropdown-content {
+                display: block;
+            }
+        }
+
+        /* Mobile View (Dưới 1024px) */
+        @media (max-width: 1023px) {
+            .main-header {
+                padding: 10px var(--padding-mobile);
+            }
+            
+            /* Cấu hình menu di động (Sidebar) */
+            .nav-links {
+                position: absolute;
+                top: 70px; /* Vị trí dưới header */
+                left: 0;
+                width: 100%;
+                background-color: white;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                flex-direction: column;
+                padding: 10px 0;
+                display: none; 
+                z-index: 90;
+                height: auto;
+            }
+            
+            .nav-links .nav-item {
+                display: block;
+                width: 100%;
+            }
+            
+            .nav-links a {
+                padding: 15px var(--padding-mobile);
+                border-bottom: 1px solid var(--color-border);
+                width: 100%;
+                box-sizing: border-box;
+                display: block; /* Links chiếm toàn bộ chiều rộng */
+                text-align: left;
+            }
+            
+            /* Kích hoạt menu khi checkbox được check (Checkbox Hack) */
+            .menu-checkbox:checked ~ .nav-links {
+                display: flex; 
+            }
+
+            /* Chuyển đổi icon mở/đóng */
+            .menu-checkbox:checked ~ .nav-actions .mobile-menu-icon #open-icon { display: none; }
+            .menu-checkbox:checked ~ .nav-actions .mobile-menu-icon #close-icon { display: inline-block; }
+            
+            /* Dropdown trên mobile sẽ bung ra theo chiều dọc (pure CSS :hover chỉ hoạt động với click giả lập hoặc tap lâu) */
+            .dropdown-content {
+                position: static; /* Làm cho dropdown xuất hiện ngay bên dưới */
+                box-shadow: none;
+                border: none;
+                min-width: 100%;
+                background-color: var(--color-secondary);
+                padding: 0;
+                transform: none;
+                margin-top: 0;
+            }
+            
+            .dropdown-content a {
+                padding-left: 30px; /* Thụt lề cho link dropdown */
+                border-bottom: 1px dashed var(--color-border);
+            }
+        }
+        
+    
+
+.content{
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom:20px ;
+    font-family: 'Space Grotesk', sans-serif;
+}
+.content1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-size: 20px;
+    padding-bottom: 30px;
+}
+.content1 a{
+    color: gray;
+    text-decoration: none;
+    border-bottom: 2px solid wheat;
+}
+.content1 a:hover{
+    color: rgb(95, 95, 95);
+}
+.product-card {
+    background-color: #ffffff; 
+    /* Đảm bảo chữ bên trong căn lề trái */ 
+    /* Có thể thêm shadow nếu muốn làm nổi bật */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    /* flex-wrap: wrap;x */
+    height: 487px;
+}
+
+#sp{
+    gap: 10px;
+    
+    display: flex;
+}
+/* --- Hình ảnh Sản phẩm --- */
+.product-image {
+    width: 100%;
+    /* Thêm padding/margin nếu cần tạo khoảng trắng quanh ảnh */
+}
+.product-item{
+    width: calc(100% / 5 - 10px);
+    height: 100%;
+}
+.product-image img {
+    width: 100%;
+    /* Đảm bảo ảnh không bị giãn hoặc méo */
+    display: block; 
+    /* Placeholder: Giả lập ảnh sọc đen trắng nếu bạn không có ảnh */
+    min-height: 150px; 
+    object-fit: cover;
+    background-color: #f0f0f0; 
+}
+.productList{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* --- Thông tin Sản phẩm --- */
+.product-details {
+    padding: 10px 15px 20px 15px; /* Padding bên trong card */
+}
+
+/* --- Thương hiệu (BO ANGELS) --- */
+.product-brand {
+    font-size: 14px;
+    font-weight: bold;
+    /* Màu xám nhạt như trong hình */
+    color: #888888; 
+    margin-bottom: 5px;
+    letter-spacing: 0.5px;
+}
+
+/* --- Tên Sản phẩm (Title) --- */
+.product-title {
+    font-size: 18px;
+    /* Rất đậm như trong hình */
+    font-weight: 800; 
+    color: #000000;
+    margin-bottom: 10px;
+    /* Đảm bảo tiêu đề không có margin mặc định */
+    line-height: 1.3; 
+}
+
+/* --- Giá Sản phẩm (Price) --- */
+.product-price {
+    font-size: 22px;
+    /* Cực kỳ đậm */
+    font-weight: 900; 
+    color: #000000;
+}
+.product-title:hover{
+    color : #2F80ED;
+}
+.product-card11 {
+    background-color: #ffffff; 
+    /* Đảm bảo chữ bên trong căn lề trái */ 
+    /* Có thể thêm shadow nếu muốn làm nổi bật */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    /* flex-wrap: wrap;x */
+    height: 487px;
+}
+
+#sp{
+    gap: 10px;
+    
+    display: flex;
+}
+/* --- Hình ảnh Sản phẩm --- */
+.product-image1 {
+    width: 100%;
+    /* Thêm padding/margin nếu cần tạo khoảng trắng quanh ảnh */
+}
+.product-item1{
+    width: calc(100% / 5 - 10px);
+    height: 100%;
+}
+.product-image1 img {
+    width: 100%;
+    /* Đảm bảo ảnh không bị giãn hoặc méo */
+    display: block; 
+    /* Placeholder: Giả lập ảnh sọc đen trắng nếu bạn không có ảnh */
+    min-height: 150px; 
+    object-fit: cover;
+    background-color: #f0f0f0; 
+}
+.productList{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* --- Thông tin Sản phẩm --- */
+.product-details1 {
+    padding: 10px 15px 20px 15px; /* Padding bên trong card */
+}
+
+/* --- Thương hiệu (BO ANGELS) --- */
+.product-brand1 {
+    font-size: 14px;
+    font-weight: bold;
+    /* Màu xám nhạt như trong hình */
+    color: #888888; 
+    margin-bottom: 5px;
+    letter-spacing: 0.5px;
+}
+
+/* --- Tên Sản phẩm (Title) --- */
+.product-title1 {
+    font-size: 18px;
+    /* Rất đậm như trong hình */
+    font-weight: 800; 
+    color: #000000;
+    margin-bottom: 10px;
+    /* Đảm bảo tiêu đề không có margin mặc định */
+    line-height: 1.3; 
+}
+
+/* --- Giá Sản phẩm (Price) --- */
+.product-price1 {
+    font-size: 22px;
+    /* Cực kỳ đậm */
+    font-weight: 900; 
+    color: #000000;
+}
+.product-title1:hover{
+    color : #2F80ED;
+}
+.wiew {
+    display: flex;
+    justify-content: center;
+}
+.wiew button{
+    background-color: var(--color-primary);
+    color: white;
+    border: 2px solid var(--color-primary);
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 4px;
+}
+.wiew button:hover{
+    background-color: white;
+    color: var(--color-primary);
+}
+.content2{
+    font-size: 32px;
+    text-align: center;
+    padding-top: 20px;
+    font-weight: bolder;
+    padding-bottom:20px ;
+}
+.banner1{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    
+}
+.banner1 img{
+    width: 100%;
+    height: auto;
+}
+/* .banner3 {
+    text-align: center;
+    font-size: 20px;
+    line-height: 20px;
+} */
+ .suppercontent{
+    text-align: center;
+    padding-top: 20px;
+    font-size: 32px;
+    font-weight: bold;
+ }
+ .smallcontent {
+    font-size: 20px;
+    text-align: center;
+    padding-top: 20px;
+ }
+ .smallcontent a{
+    border-bottom: 2px solid wheat;
+    text-decoration: none;
+    color: grey;
+ }
+ .smallcontent a:hover{
+    color: rgb(95, 95, 95);
+ }
+ .banner5 img{
+    width: 100%;
+ }
+ .banner5{
+    padding: 10px 20px;
+    padding-top: 20px;
+ }
+ .contenta{
+    text-align: center;
+    font-size: 32px;
+    font-weight: bolder;
+    padding-bottom: 20px ;
+ }
+.Instagram{
+    text-align: center;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.Instagram p{
+    font-size: 32px;
+    font-weight: bolder;
+}
+.image-gallery {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Khoảng cách nhỏ giữa các ảnh */
+    width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng */
+    flex-wrap: nowrap; /* Đảm bảo các ảnh không bị xuống dòng */
+}
+
+/* --- 2. Mỗi Item trong Gallery (Chứa ảnh và overlay) --- */
+.gallery-item {
+    position: relative;
+    /* Rất quan trọng: Thiết lập chiều rộng để chia đều 5 cột, trừ đi khoảng cách (gap) */
+    flex: 1 1 18%; /* Tăng trưởng (1), co lại (1), chiều rộng cơ bản (1/5 là 20%, trừ gap còn khoảng 18%) */
+    
+    /* Mặc định có viền */
+    border: 1px solid #ddd; 
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Thêm chuyển động cho viền */
+
+    /* Thiết lập tỷ lệ khung hình cho ảnh (vuông) */
+    padding-top: 20%; /* Đặt padding-top nhỏ để chỉ thiết lập tỷ lệ */
+    height: 0; /* Đặt chiều cao = 0 để padding-top kiểm soát kích thước */
+    /* Tuy nhiên, với ảnh chân dung, chúng ta cần chiều cao cố định hoặc tỷ lệ khác */
+    height: 350px; /* Chiều cao cố định cho ảnh chân dung */
+    width: 100%;
+    
+    overflow: hidden; 
+    cursor: pointer; 
+}
+
+/* --- 3. Ảnh và Hiệu ứng Thu nhỏ --- */
+.gallery-item img {
+    position: absolute; /* Quan trọng: Đặt ảnh trong khung cố định 350px */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: block;
+    /* Rất quan trọng: Thêm chuyển động mượt mà cho transform */
+    transition: transform 0.4s ease-out; 
+}
+
+/* --- 4. Hiệu ứng Hover (Mất viền, Thu nhỏ ảnh, Hiện Overlay) --- */
+.gallery-item:hover {
+    /* MẤT VIỀN: Chuyển viền thành màu nền (hoặc transparent) */
+    border-color: transparent; 
+    /* Có thể thêm shadow để tạo cảm giác ảnh nổi lên */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+}
+
+.gallery-item:hover img {
+    /* Thu nhỏ ảnh 5% */
+    transform: scale(0.95); 
+}
+
+.gallery-item:hover .overlay {
+    opacity: 1; /* Hiện overlay */
+}
+
+.gallery-item:hover .instagram-icon {
+    transform: translateY(0); /* Icon trồi lên */
+}
+
+/* ----------------------------------------------- */
+/* --- 5. Overlay và Icon (Hiệu ứng Trồi Lên) --- */
+/* ----------------------------------------------- */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.4s ease-out; 
+    z-index: 5; /* Đặt icon lên trên ảnh */
+}
+
+.instagram-icon {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    color: #000000;
+    font-size: 28px;
+    text-decoration: none;
+    
+    /* Đẩy icon xuống dưới 20px */
+    transform: translateY(20px); 
+    transition: transform 0.4s ease-out, background-color 0.3s ease; 
+}
+
+.instagram-icon:hover {
+    background-color: #e4405f; 
+    color: #ffffff;
+}
+.bannerb img{
+    width: 100%;
+}
+.bannerb{
+    padding-top:25px ;
+}
+.bannerc{
+    font-size: 32px;
+    font-weight: bolder;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+/* --- Global Reset & Base Styles --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+}
+
+
+/* ------------------------------------------- */
+/* --- 1. Container Chính (Bố cục 3 cột) --- */
+/* ------------------------------------------- */
+.reviews-container {
+    display: flex;
+    justify-content: space-between; /* Phân bổ 3 box đều nhau */
+    gap: 20px; /* Khoảng cách giữa các box */
+    padding: 20px 10px;
+    position: relative; /* Quan trọng cho nút cuộn */
+}
+
+/* ------------------------------------------- */
+/* --- 2. Mỗi Hộp Đánh Giá (Review Card) --- */
+/* ------------------------------------------- */
+.review-card {
+    flex: 1 1 30%; /* Đảm bảo mỗi box chiếm khoảng 1/3, có thể co giãn */
+    background-color: #ffffff; /* Nền trắng */
+    border-radius: 8px;
+    /* Loại bỏ border-shadow để giữ vẻ ngoài phẳng, hiện đại */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); */
+    padding: 20px;
+    height: auto; /* Chiều cao tự điều chỉnh theo nội dung */
+    min-height: 250px; /* Đảm bảo chiều cao tối thiểu đồng đều */
+    
+    /* Dùng flexbox để căn chỉnh nội dung theo chiều dọc nếu cần */
+    display: flex;
+    flex-direction: column;
+    border: 1px solid white;
+    box-shadow: 2px 2px 2px 2px rgb(215, 213, 213);
+}
+
+/* --- Phần Header (Username và Ảnh) --- */
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Căn chỉnh tên và ảnh lên trên */
+    margin-bottom: 5px;
+}
+
+.username {
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+}
+
+.user-photo {
+    /* Đây là ảnh sản phẩm/ảnh tag nhỏ bên phải review text */
+    width: 60px; 
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px; /* Góc hơi tròn */
+    margin-left: 10px; /* Khoảng cách với username */
+}
+
+/* --- Ngôi sao Đánh giá --- */
+.rating {
+    margin-bottom: 10px;
+    color: #ffd700; /* Màu vàng Gold cho sao */
+    font-size: 14px;
+}
+.star {
+    /* Font size cho ngôi sao */
+    font-size: 18px; 
+}
+
+/* --- Nội dung Đánh giá --- */
+.review-text {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.5;
+    flex-grow: 1; /* Cho phép text chiếm hết không gian còn lại */
+    margin-bottom: 15px;
+}
+
+/* --- Ảnh sản phẩm được Tag (ảnh lớn bên phải trong box 1, 2) --- */
+.product-tag-image {
+    /* Dùng absolute position để đặt ảnh chồng lên góc phải trên */
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 80px; /* Kích thước ảnh tag */
+    height: 80px;
+    overflow: hidden;
+    border-radius: 4px;
+}
+.product-tag-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* NOTE: Cần điều chỉnh lại HTML/CSS nếu bạn muốn ảnh nằm bên trong review text như box 1 & 2 */
+/* Nếu ảnh nằm ngang hàng với text: */
+.review-card {
+    /* ... các thuộc tính khác ... */
+    display: block; 
+}
+
+.review-text {
+    /* ... */
+    float: left; /* Cho phép text trôi nổi bên trái */
+    width: calc(100% - 70px); /* 70px là khoảng cho ảnh */
+}
+
+.product-tag-image {
+    float: right; /* Đẩy ảnh sang phải */
+    position: static; /* Bỏ position absolute */
+    margin-left: 10px;
+}
+
+/* ------------------------------------------- */
+/* --- 3. Nút Cuộn/Navigation (Mũi tên) --- */
+/* ------------------------------------------- */
+.scroll-navigation {
+    position: absolute;
+    top: 50%; /* Đặt ở giữa chiều cao */
+    right: -10px; /* Đẩy ra ngoài container một chút */
+    transform: translateY(-50%);
+    
+    width: 40px;
+    height: 40px;
+    background-color: #ffffff; /* Nền trắng */
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 18px;
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.features-section {
+    display: flex;
+    /* Chia đều không gian giữa 4 item */
+    justify-content: space-between; 
+    align-items: flex-start; /* Căn chỉnh các item lên trên */
+    padding: 40px 80px; /* Padding hai bên */
+    border-top: 1px solid #eee; /* Viền trên/dưới nhẹ như trong mẫu */
+    border-bottom: 1px solid #eee; 
+}
+
+/* ------------------------------------------- */
+/* --- 2. Mỗi Item Dịch vụ --- */
+/* ------------------------------------------- */
+.feature-item {
+    /* Quan trọng: Đảm bảo 4 item chiếm đều 1/4 không gian */
+    flex: 1; 
+    display: flex;
+    align-items: center; /* Căn chỉnh icon và chữ ngang hàng */
+    /* Giới hạn chiều rộng để item không quá lớn */
+    max-width: 250px; 
+    text-align: left;
+    gap: 15px; /* Khoảng cách giữa icon và chữ */
+    padding: 0 10px;
+}
+
+/* --- Icon --- */
+.feature-icon {
+    font-size: 30px;
+    color: #000;
+    /* Đảm bảo icon không bị co lại */
+    flex-shrink: 0; 
+}
+
+/* --- Nội dung văn bản --- */
+.text-content {
+    /* Cho phép chữ chiếm phần còn lại */
+    flex-grow: 1; 
+}
+
+.title {
+    font-size: 14px;
+    font-weight: 800; /* Rất đậm */
+    color: #000;
+    margin-bottom: 3px;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+.description {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.2;
+}
+.main-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: #c9c9c9; 
+    padding: 60px 80px; 
+    color: #333;
+    width: 100%;
+    margin-top: 30px; 
+}
+
+/* ------------------------------------------- */
+/* --- 2. Các Cột Footer (Giữ nguyên) --- */
+/* ------------------------------------------- */
+.footer-column {
+    flex: 1 1 20%; 
+    max-width: 250px;
+    padding: 0 10px;
+}
+
+/* --- Logo & Bản quyền (Cột 1) --- */
+.logo-section {
+    flex: 1 1 30%; 
+    max-width: 350px;
+    padding-right: 30px;
+}
+
+/* --- STYLE MỚI CHO ẢNH LOGO --- */
+.footer-image-logo {
+    max-width: 180px; /* Điều chỉnh kích thước ảnh logo theo ý bạn */
+    height: auto; /* Đảm bảo tỷ lệ ảnh */
+    display: block; /* Loại bỏ khoảng trắng dưới ảnh */
+    margin-bottom: 25px; /* Khoảng cách với copyright text */
+}
+
+/* --- Copyright Text (Giữ nguyên) --- */
+.copyright {
+    font-size: 11px;
+    line-height: 1.6;
+    color: #555;
+    font-family: Arial, sans-serif; /* Có thể dùng Arial cho text nhỏ */
+}
+
+/* --- Tiêu đề Cột (Giữ nguyên) --- */
+.column-title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #000;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* --- Danh sách Liên kết (Giữ nguyên) --- */
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 8px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: #333;
+    font-size: 13px;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #000;
+}
+
+
+/* ------------------------------------------- */
+/* --- 3. Mạng Xã Hội (Giữ nguyên) --- */
+/* ------------------------------------------- */
+.social-icons {
+    display: flex;
+    gap: 10px;
+    margin-top: -5px; 
+}
+
+.social-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    color: #ffffff; 
+}
+
+.social-icon.facebook { background-color: #3b5998; }
+.social-icon.youtube { background-color: #c4302b; }
+.social-icon.instagram { background-color: #e1306c; }
+.social-icon.tiktok { background-color: #000000; }
+/* ========================= */
+/* 🔥 Banner Slider Section 🔥 */
+/* ========================= */
+  .Banner {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
+.Banner img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.Banner img.active {
+  opacity: 1;
+}

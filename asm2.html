@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="asm2.html"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+</head>
+<body>
+     <header class="main-header">
+        <div class="logo">
+            <!-- Logo gốc có thể bị ngược màu trên nền trắng, giữ nguyên nếu nó là PNG trong suốt -->
+            <img src="https://vn-test-11.slatic.net/shop/9e7630d549103707e7f5283740b1cd12.png" alt="Saint Angels Logo"> 
+        </div>
+
+        <!-- Checkbox Input Dành cho Mobile Menu (Sử dụng CSS Hack) -->
+        <input type="checkbox" id="menu-toggle" class="menu-checkbox" aria-hidden="true">
+
+        <!-- Desktop Navigation / Mobile Menu Content -->
+        <nav class="nav-links">
+            <div class="nav-item has-dropdown">
+                <a href="#">About <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="#">Our Story</a>
+                    <a href="#">Lookbook</a>
+                    <a href="#">Careers</a>
+                </div>
+            </div>
+
+            <div class="nav-item has-dropdown">
+                <a href="#">SHOP <i class="fas fa-shipping-fast"></i> <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="dsspasm.html">All Products</a>
+                    <a href="#">New Arrivals</a>
+                    <a href="#">Sale</a>
+                </div>
+            </div>
+            
+            <div class="nav-item has-dropdown">
+                <a href="#">ANGELWEAR <i class="fas fa-crown"></i> <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="#">Tops</a>
+                    <a href="#">Bottoms</a>
+                    <a href="#">Accessories</a>
+                </div>
+            </div>
+
+            <div class="nav-item has-dropdown">
+                <a href="#">Shopee <i class="fas fa-certificate"></i> <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="#">Official Store Link</a>
+                    <a href="#">Flash Sales</a>
+                </div>
+            </div>
+
+            <a href="#">Blog</a>
+            <a href="#">Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+            <div class="action-icon search-icon">
+                <i class="fas fa-search"></i>
+            </div>
+
+            <div class="action-icon user-menu">
+                <i class="fas fa-user"></i>
+            </div>
+            
+            <div class="action-icon cart">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-count">0</span>
+            </div>
+            
+            <!-- Mobile Menu Icon - Bây giờ là một <label> liên kết với checkbox -->
+            <label for="menu-toggle" class="mobile-menu-icon">
+                <i class="fas fa-bars" id="open-icon"></i>
+                <i class="fas fa-times" id="close-icon"></i>
+            </label>
+        </div>
+    </header>
+    <div class="Banner">
+            <img src="https://bizweb.dktcdn.net/100/343/638/themes/1007215/assets/slider_1.jpg?1745854848541" alt="" width="100%">
+            <img src="https://bizweb.dktcdn.net/100/343/638/themes/1007215/assets/slider_3.jpg?1745854848541" alt="" width="100%">
+    </div>
+       <script>
+  let index = 0;
+  const images = document.querySelectorAll('.Banner img');
+  const total = images.length;
+
+  function showNextImage() {
+    images[index].classList.remove('active');
+    index = (index + 1) % total;
+    images[index].classList.add('active');
+  }
+
+  // Khởi tạo ảnh đầu tiên
+  images[0].classList.add('active');
+  setInterval(showNextImage, 3000); // đổi ảnh sau mỗi 3 giây
+</script>
+    <div class="content">
+        <h1>🪽 WINGS OF LUCK, PEACE & LOVE ©️2025 SHOP ANGELWEAR 👼</h1>
+    </div>
+    <div class="content1">
+        <a href="">QUẦN ÁO 🪽 CLOTHESs</a>
+        <a href="">PHỤ KIỆN 💝 ACCESSORIES</a>
+    </div>
+    <div class="product-card">
+        <div id="sp">
+            <div class="product-item">
+                <div class="product-image">
+                <img src="https://bizweb.dktcdn.net/thumb/large/100/343/638/products/striped-bw-12-1758653712613.jpg?v=1758653727670" alt="Round Neck Knit Long Sleeve T-Shirt">
+                </div>
+            
+                <div class="product-details">
+                    <p class="product-brand">BO ANGELS</p>
+                    <a href="ctspasmhi.html" class="product-title">Round Neck Knit Long Sleeve T-Shirt</a>
+                    <p class="product-price">490.000₫</p>
+            </div>
+    </div>
+</div>
+   <!-- <div class="product-item">
+    <div class="product-image">
+        <img src="https://bizweb.dktcdn.net/thumb/large/100/343/638/products/striped-bw-12-1758653712613.jpg?v=1758653727670" alt="Round Neck Knit Long Sleeve T-Shirt">
+    </div>
+    
+    <div class="product-details">
+        <p class="product-brand">BO ANGELS</p>
+        
+        <h2 class="product-title">Round Neck Knit Long Sleeve T-Shirt</h2>
+        
+        <p class="product-price">490.000₫</p>
+    </div>
+</div>
+   <div class="product-item">
+    <div class="product-image">
+        <img src="https://bizweb.dktcdn.net/thumb/large/100/343/638/products/striped-bw-12-1758653712613.jpg?v=1758653727670" alt="Round Neck Knit Long Sleeve T-Shirt">
+    </div>
+    
+    <div class="product-details">
+        <p class="product-brand">BO ANGELS</p>
+        
+        <h2 class="product-title">Round Neck Knit Long Sleeve T-Shirt</h2>
+        
+        <p class="product-price">490.000₫</p>
+    </div>
+</div>
+<div class="product-item">
+    <div class="product-image">
+        <img src="https://bizweb.dktcdn.net/thumb/large/100/343/638/products/striped-bw-12-1758653712613.jpg?v=1758653727670" alt="Round Neck Knit Long Sleeve T-Shirt">
+    </div>
+    
+    <div class="product-details">
+        <p class="product-brand">BO ANGELS</p>
+        
+        <h2 class="product-title">Round Neck Knit Long Sleeve T-Shirt</h2>
+        
+        <p class="product-price">490.000₫</p>
+    </div>
+</div>
+<div class="product-item">
+    <div class="product-image">
+        <img src="https://bizweb.dktcdn.net/thumb/large/100/343/638/products/striped-bw-12-1758653712613.jpg?v=1758653727670" alt="Round Neck Knit Long Sleeve T-Shirt">
+    </div>
+    
+    <div class="product-details">
+        <p class="product-brand">BO ANGELS</p>
+        
+        <h2 class="product-title">Round Neck Knit Long Sleeve T-Shirt</h2>
+        
+        <p class="product-price">490.000₫</p>
+    </div>
+</div>
+<div class="product-item">
+    <div class="product-image">
+        <img src="https://bizweb.dktcdn.net/thumb/large/100/343/638/products/striped-bw-12-1758653712613.jpg?v=1758653727670" alt="Round Neck Knit Long Sleeve T-Shirt">
+    </div>
+    
+    <div class="product-details">
+        <p class="product-brand">BO ANGELS</p>
+        
+        <h2 class="product-title">Round Neck Knit Long Sleeve T-Shirt</h2>
+        
+        <p class="product-price">490.000₫</p>
+    </div> -->
+<!-- </div> -->
+<!-- <div class="product-item">
+    <div class="product-image">
+        <img src="https://bizweb.dktcdn.net/thumb/large/100/343/638/products/striped-bw-12-1758653712613.jpg?v=1758653727670" alt="Round Neck Knit Long Sleeve T-Shirt">
+    </div>
+    
+    <div class="product-details">
+        <p class="product-brand">BO ANGELS</p>
+        
+        <h2 class="product-title">Round Neck Knit Long Sleeve T-Shirt</h2>
+        
+        <p class="product-price">490.000₫</p>
+    </div>
+</div> -->
+</div>
+<div class="wiew">
+    <button>View All</button>
+</div>
+<div class="content2">
+    <p>BO ANGELS ✨💎👼 THE DIVINE SPLIT ✨🌌💫 Jewelry Collection</p>
+</div>
+<div class="banner1">
+    <div class="banner3">
+    <img src="https://bizweb.dktcdn.net/100/343/638/themes/1007215/assets/lookbook_1_image.jpg?1745854848541" alt="">
+    <p>✦ LUCK 🍀 "Brave, and you might be recognized."</p>
+    </div>
+    <div class="banner3">
+    <img src="https://bizweb.dktcdn.net/100/343/638/themes/1007215/assets/lookbook_2_image.jpg?1745854848541" alt="">
+    <p>✦ PEACE 🕊 "Stillness is strength."</p>
+    </div>
+    <div class="banner3">
+    <img src="https://bizweb.dktcdn.net/100/343/638/themes/1007215/assets/lookbook_3_image.jpg?1745854848541" alt="">
+    <p>✦ LOVE 💘 "Even cracked, the heart remains open."</p>
+    </div>
+</div>
+<div class="suppercontent">
+    <p>
+        Lucky 🍀 Peace 🙏 and Love 💝
+    </p>
+</div>
+<div class="smallcontent">
+    <a href=""> JEWELRY✨ </a>
+</div>
+<div class="wiew">
+    <button>View All</button>
+</div>
+<div class="banner5">
+    <img src="https://bizweb.dktcdn.net/100/343/638/themes/1007215/assets/imgtext_1_img.jpg?1745854848541" alt="">
+</div>
+<div class="contenta">
+    <p>🛡️ Guardian Angels 👼</p>
+</div>
+ <div class="content1">
+        <a href="">FOOTWEAR 👣 GIÀY DÉP</a>
+        <a href="">	PHỤ KIỆN 💝 ACCESSORIES</a>
+</div>
+<div class="wiew">
+    <button>View All</button>
+</div>
+<!-- <div class="video-container">
+    <iframe 
+        width="100%" 
+        height="100%" 
+        src="https://bizweb.dktcdn.net/100/343/638/themes/1007215/assets/section_video_bg.jpg?1745854848541" 
+        frameborder="0" 
+        allow="autoplay; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+
+    <div class="video-overlay">
+        <div class="play-button"></div>
+    </div>
+</div>				 -->
+<div class="Instagram">
+    <p> Follow Instagram @bobuisaigon 📸✨ </p>
+</div>
+<div class="image-gallery">
+    <div class="gallery-item">
+        <img src="https://bizweb.dktcdn.net/100/343/638/themes/1007215/assets/insta_1_img.jpg?1745854848541" alt="Person with headphones">
+        <div class="overlay">
+            <a href="https://instagram.com/yourprofile" target="_blank" class="instagram-icon">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="gallery-item">
+        <img src="https://bizweb.dktcdn.net/100/343/638/themes/1007215/assets/insta_2_img.jpg?1745854848541" alt="Person looking away">
+        <div class="overlay">
+            <a href="https://instagram.com/yourprofile" target="_blank" class="instagram-icon">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+    <div class="gallery-item">
+        <img src="https://bizweb.dktcdn.net/100/343/638/themes/1007215/assets/insta_3_img.jpg?1745854848541" alt="Person looking away">
+        <div class="overlay">
+            <a href="https://instagram.com/yourprofile" target="_blank" class="instagram-icon">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+    <div class="gallery-item">
+        <img src="https://bizweb.dktcdn.net/100/343/638/themes/1007215/assets/insta_4_img.jpg?1745854848541" alt="Person looking away">
+        <div class="overlay">
+            <a href="https://instagram.com/yourprofile" target="_blank" class="instagram-icon">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+    <div class="gallery-item">
+        <img src="https://bizweb.dktcdn.net/100/343/638/themes/1007215/assets/insta_5_img.jpg?1745854848541" alt="Person looking away">
+        <div class="overlay">
+            <a href="https://instagram.com/yourprofile" target="_blank" class="instagram-icon">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+    </div>
+    <div class="bannerb">
+        <img src="https://bizweb.dktcdn.net/100/343/638/themes/1007215/assets/imgtext_2_img.jpg?1745854848541" alt="">
+    </div>
+    <div class="bannerc">
+        💌 Phản hồi từ Khách hàng 💬✨😍
+    </div>
+ <div class="reviews-container">
+    
+    <div class="review-card">
+        <div class="product-tag-image">
+            <img src="https://bizweb.dktcdn.net/thumb/compact/100/343/638/themes/1007215/assets/cus_review_avatar_1.jpg?1745854848541" alt="Ảnh sản phẩm được đánh giá">
+        </div>
+        
+        <div class="content-wrapper">
+            <h3 class="username">betien0212</h3>
+            <div class="rating">
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+            </div>
+            <p class="review-text">Quá xuất sắc luôn mọi người, áo đẹp, khuyên tai đẹp. Hài lòng</p>
+        </div>
+    </div>
+    
+    <div class="review-card">
+        <div class="product-tag-image">
+            <img src="https://bizweb.dktcdn.net/thumb/compact/100/343/638/themes/1007215/assets/cus_review_avatar_2.jpg?1745854848541" alt="Ảnh sản phẩm được đánh giá">
+        </div>
+        <div class="content-wrapper">
+            <h3 class="username">synhoang_12</h3>
+            <div class="rating">
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+            </div>
+            <p class="review-text">Rất đeppp cho shoppp 1000000 điểm 💖💖💖 Săn thêm màu bạc nữa đeo lần hai đây lun</p>
+        </div>
+    </div>
+
+    <div class="review-card">
+        <div class="product-tag-image user-photo-style">
+            <img src="https://bizweb.dktcdn.net/thumb/compact/100/343/638/themes/1007215/assets/cus_review_avatar_2.jpg?1745854848541" alt="Ảnh user mặc sản phẩm">
+        </div>
+        <div class="content-wrapper">
+            <h3 class="username">bngnguyen889</h3>
+            <div class="rating">
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+            </div>
+            <p class="review-text">Sản phẩm rất đẹp, shop đóng gói có kèm theo miếng giấy thơm nữa</p>
+        </div>
+    </div>
+</div>
+ <div class="features-section">
+        
+        <div class="feature-item">
+            <img src="//bizweb.dktcdn.net/100/343/638/themes/1007215/assets/policies_icon_1.png?1745854848541" alt=""> 
+            <div class="text-content">
+                <h3 class="title">GIAO HÀNG SIÊU TỐC</h3>
+                <p class="description">Express Delivery</p>
+            </div>
+        </div>
+
+        <div class="feature-item">
+            <img src="//bizweb.dktcdn.net/100/343/638/themes/1007215/assets/policies_icon_2.png?1745854848541" alt="">
+            <div class="text-content">
+                <h3 class="title">QUÀ TẶNG BẤT NGỜ</h3>
+                <p class="description">Surprise gifts</p>
+            </div>
+        </div>
+
+        <div class="feature-item">
+            <img src="//bizweb.dktcdn.net/100/343/638/themes/1007215/assets/policies_icon_3.png?1745854848541" alt="">
+            <div class="text-content">
+                <h3 class="title">KIỂM ĐỊNH KĨ LƯỠNG</h3>
+                <p class="description">Thorough Inspection</p>
+            </div>
+        </div>
+
+        <div class="feature-item">
+            <img src="//bizweb.dktcdn.net/100/343/638/themes/1007215/assets/policies_icon_4.png?1745854848541" alt="">
+            <div class="text-content">
+                <h3 class="title">LIÊN HỆ HỖ TRỢ</h3>
+                <p class="description">Contact Support</p>
+            </div>
+        </div>
+    </div>
+    <footer class="main-footer">
+    
+    <div class="footer-column logo-section">
+        <img src="//bizweb.dktcdn.net/100/343/638/themes/1007215/assets/logo-footer.png?1745854848541" alt="" width="50%">
+        <p class="copyright">
+            © All rights reserved BOBBUI FASHION <br> COMPANY LIMITED
+        </p>
+    </div>
+
+    <div class="footer-column">
+        <h3 class="column-title">CHÍNH SÁCH</h3>
+        <ul class="footer-links">
+            <li><a href="#">Chính sách bảo mật</a></li>
+            <li><a href="#">Chính sách Giao hàng & Đổi trả</a></li>
+            <li><a href="#">Quy định sử dụng</a></li>
+        </ul>
+    </div>
+
+    <div class="footer-column">
+        <h3 class="column-title">HỖ TRỢ KHÁCH HÀNG</h3>
+        <ul class="footer-links">
+            <li><a href="#">Tìm kiếm</a></li>
+            <li><a href="#">Đăng nhập</a></li>
+            <li><a href="#">Đăng ký</a></li>
+            <li><a href="#">Giỏ hàng</a></li>
+        </ul>
+    </div>
+
+    <div class="footer-column social-section">
+        <h3 class="column-title">ĐĂNG KÝ NHẬN TIN</h3>
+        <div class="social-icons">
+            <a href="#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon youtube"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon tiktok"><i class="fab fa-tiktok"></i></a>
+        </div>
+    </div>
+</footer>
+<script src="asmho.js"></script>
+</body>
+</html>
